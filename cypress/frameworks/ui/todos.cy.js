@@ -17,21 +17,46 @@ describe("Todos should check all the functionalities of the todo page", () => {
   });
 
   it("should show the not completed tasks correctly", () => {
+    cy.intercept("GET", "**/api/v1/tasks", {
+      fixture: "tasks.json",
+    });
     cy.visit("/todo");
-    cy.get("[data-testid='todo-item']").eq(0).should("have.css", "background-color", "rgb(63, 81, 181)");
-    cy.get('[data-testid="complete-task"]').eq(0).should("not.have.attr", "checked");
+    cy.get("[data-testid='todo-item']")
+      .eq(0)
+      .should("have.css", "background-color", "rgb(63, 81, 181)");
+    cy.get('[data-testid="complete-task"]')
+      .eq(0)
+      .should("not.have.attr", "checked");
   });
 
   it("should show the completed tasks correctly", () => {
+    cy.intercept("GET", "**/api/v1/tasks", {
+      fixture: "tasks.json",
+    });
     cy.visit("/todo");
-    cy.get("[data-testid='todo-item']").eq(1).should("have.css", "background-color", "rgb(33, 76, 97)");
+    cy.get("[data-testid='todo-item']")
+      .eq(1)
+      .should("have.css", "background-color", "rgb(33, 76, 97)");
     // first way
     //cy.get('[data-testid="complete-task"]').should("have.prop", "checked");
     // second way
     //cy.get('[data-testid="complete-task"]').should("be.checked");
     // third way
-    cy.get('[data-testid="complete-task"]').eq(1).should("have.attr", "checked");
-    cy.get('[data-testid="todo-text"]').eq(1).should("have.css", "text-decoration-line", "line-through");
+    cy.get('[data-testid="complete-task"]')
+      .eq(1)
+      .should("have.attr", "checked");
+    cy.get('[data-testid="todo-text"]')
+      .eq(1)
+      .should("have.css", "text-decoration-line", "line-through");
   });
 
+  it("should show the pagination if there are more than 5 tasks", () => {
+    cy.intercept("GET", "**/api/v1/tasks", {
+      fixture: "tasks-pagination.json",
+    });
+    cy.visit("/todo");
+    cy.get("[data-test-id='pagination-link']")
+      .should("be.visible")
+      .and("have.length", 2);
+  });
 });
