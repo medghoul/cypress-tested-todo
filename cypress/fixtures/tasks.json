@@ -1,0 +1,28 @@
+ {
+    "tasks": [
+        {
+            "isCompleted": false,
+            "_id": "67e1bef3c8f59e4c664a0f54",
+            "item": "Learn cypress",
+            "userID": "67e0359f67ce0f42321a06d5",
+            "createdAt": "2025-03-24T20:22:11.249Z",
+            "__v": 0
+        },
+        {
+            "isCompleted": true,
+            "_id": "67e1bef3c8f59e4c664a0f55",
+            "item": "Learn javascript",
+            "userID": "67e0359f67ce0f42321a06d5",
+            "createdAt": "2025-03-24T20:22:11.249Z",
+            "__v": 0
+        },
+        {
+            "isCompleted": false,
+            "_id": "67e1bef3c8f59e4c664a0f56",
+            "item": "Learn react",
+            "userID": "67e0359f67ce0f42321a06d5",
+            "createdAt": "2025-03-24T20:22:11.249Z",
+            "__v": 0
+        }
+    ]
+ }
