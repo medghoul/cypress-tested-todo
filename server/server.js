@@ -12,21 +12,6 @@ const TaskRoutes = require('./routes/tasks');
 // App Port
 const port = process.env.PORT || 8080;
 
-//Connect to DB
-try {
-  mongoose.connect(
-    process.env.MONGO_DB_URL,
-    { useNewUrlParser: true, useUnifiedTopology: true, bufferCommands: false },
-    () => {
-      console.log('DataBase is up and running');
-    }
-  );
-} catch (err) {
-  console.log(
-    'Something went wrong, cant connect to database'
-  );
-}
-
 // MiddleWears
 app.use(express.json());
 app.use(cors());
@@ -39,6 +24,19 @@ app.use(function (req, res, next) {
 app.use('/api/v1/users', UserRoutes);
 app.use('/api/v1/tasks', authenticateToken, TaskRoutes);
 
-app.listen(port, () => {
-  console.log(`Server is up and running on port ${port}`);
-});
+// Connect to DB and start server
+mongoose
+  .connect(process.env.MONGO_DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('DataBase is up and running');
+    app.listen(port, () => {
+      console.log(`Server is up and running on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log('Something went wrong, cant connect to database');
+    console.error(err);
+  });
