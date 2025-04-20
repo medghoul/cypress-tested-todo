@@ -56,7 +56,11 @@ router.post('/login', async (req, res) => {
   const { error } = await loginSchema.validate(req.body);
 
   if (error) {
-    res.status(400).json({ message: 'Please Fill a correct Password' });
+    if (error.details[0].path[0] === 'email') {
+      res.status(400).json({ message: 'Please Fill a correct Email' });
+    } else {
+      res.status(400).json({ message: 'Please Fill a correct Password' });
+    }
     return;
   }
 
