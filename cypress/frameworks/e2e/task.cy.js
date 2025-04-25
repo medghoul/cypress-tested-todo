@@ -3,9 +3,7 @@
 describe("Test all the E2E flows scenario", () => {
   it("should be able to create a task, and then update it and delete it", () => {
     cy.visit("/");
-    cy.get("[data-testid='email']").type("john.doe@example.com");
-    cy.get("[data-testid='password']").type("Password123!");
-    cy.get("[data-testid='submit']").click();
+    cy.login("john.doe@example.com", "Password123!");
     cy.get("[data-testid='welcome']").should("be.visible");
     cy.get("[data-testid='add']").click();
 
