@@ -40,7 +40,8 @@
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:server": "nodemon ./server/server.js"
+    "start:server": "nodemon ./server/server.js",
+    "cypress:test": "npx cypress run --record --key 030545aa-0c81-40d4-b0dc-6254bdf9f4cc"
   },
   "eslintConfig": {
     "extends": [
